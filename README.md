@@ -28,7 +28,7 @@ Para rodar a aplicação localmente, siga os seguintes passos:
 
 2. **Navegue até o Diretório do Projeto**:
     ```bash
-    cd organograma-react
+    cd organo
     ```
 
 3. **Instale as Dependências**:
