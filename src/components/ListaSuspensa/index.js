@@ -10,8 +10,9 @@ export function ListaSuspensa({ content, value, id, lista, obrigatorio, onChange
         <div className={styles["lista-suspensa"]}>
             <label htmlFor={id}>{content}</label>
             <select value={value} id={id} required={obrigatorio} onChange={handleOnChange}>
+                <option value=""></option>
                 {lista.map((time) => {
-                    return <option key={time.nome}>{time.nome}</option>
+                    return <option key={time.id}>{time.nome}</option>
                 })}
             </select>
         </div>

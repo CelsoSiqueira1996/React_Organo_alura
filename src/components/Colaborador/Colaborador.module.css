@@ -1,5 +1,6 @@
 .colaborador {
     width: 280px;
+    position: relative;
 }
 
 .colaborador .cabecalho {
@@ -16,8 +17,8 @@
     background: #FFFFFF;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.08);
     border-radius: 0px 0px 10px 10px;
-    padding-top: 90px;
-    padding-bottom: 40px;
+    padding-top: 50px;
+    padding-bottom: 8px;
 }
 
 .colaborador .rodape h4 {
@@ -33,4 +34,26 @@
     line-height: 22px;
     color: #212121;
     padding: 0 16px;
+}
+
+.deletar {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    cursor: pointer;
+    transition: scale 0.1s ease-in-out;
+}
+
+.deletar:hover{
+    scale: 1.2;
+}
+
+.favoritar {
+    transition: scale 0.1s ease-in-out;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.favoritar:hover {
+    scale: 1.2;
 }

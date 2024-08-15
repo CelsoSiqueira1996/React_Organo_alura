@@ -1,9 +1,16 @@
 import styles from "./Colaborador.module.css";
+import { AiFillCloseCircle, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
-export function Colaborador({ colaborador, corPrimaria }) {
+export function Colaborador({ colaborador, cor, onDeleteComponent, handleOnClickFavorite }) {
     return (
         <div className={styles.colaborador}>
-            <div className={styles.cabecalho} style={{ backgroundColor: corPrimaria }}>
+            <AiFillCloseCircle 
+                title="Deletar Colaborador" 
+                className={styles.deletar} 
+                onClick={() => onDeleteComponent(colaborador.id)} 
+                size={25}    
+            />
+            <div className={styles.cabecalho} style={{ backgroundColor: cor }}>
                 <img src={colaborador.imagemUrl} alt={colaborador.nome}/>
             </div>
             <div className={styles.rodape}>
@@ -13,6 +20,12 @@ export function Colaborador({ colaborador, corPrimaria }) {
                 <h5>
                     {colaborador.cargo}
                 </h5>
+                <div className={styles.favoritar} onClick={() => handleOnClickFavorite(colaborador.id)}>
+                    {colaborador.favorito
+                        ? <AiFillHeart size={30} color="#ff0000" /> 
+                        : <AiOutlineHeart size={30} />
+                    }
+                </div>
             </div>
         </div>
     )
