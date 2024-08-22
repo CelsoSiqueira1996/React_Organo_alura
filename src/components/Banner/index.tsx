@@ -1,11 +1,16 @@
 import styles from "./Banner.module.css";
 
-export function Banner() {
+interface BannerProps {
+    src: string;
+    alt?: string;
+}
+
+export function Banner({ src, alt }: BannerProps) {
     return (
         <header className={styles.banner}>
             <img 
-                src="/imagens/banner.png" 
-                alt="O banner principal da página do Organo" 
+                src={src}
+                alt={alt}
                 className={styles.imagem__banner}
             />
         </header>

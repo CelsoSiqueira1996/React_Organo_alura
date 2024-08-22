@@ -1,26 +1,38 @@
 import styles from "./Formulario.module.css";
 import { Campo } from "../Campo";
-import { ListaSuspensa } from "../ListaSuspensa";
 import { Botao } from "../Botao";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { ListaSuspensa } from "../ListaSuspensa";
+import { ITime } from "../../shared/interfaces/ITime";
+import { IColaborador } from "../../shared/interfaces/IColaborador";
 
-export function Formulario({ onRegisterCollaborator, times, onCreateTeam }) {
 
-    const [nameValue, setNameValue] = useState('');
-    const [roleValue, setRoleValue] = useState('');
-    const [imageValue, setImageValue] = useState('');
-    const [teamValue, setTeamValue] = useState('');
-    const [teamNameValue, setTeamNameValue] = useState('');
-    const [teamColor, setTeamColor] = useState('#000000');
+interface FormularioProps {
+    times: ITime[];
+    onRegisterCollaborator: (colaborador: IColaborador) => void;
+    onCreateTeam: (novoTime: ITime) => void;
+}
 
-    function handleOnSubmitForm(event) {
+export function Formulario({ onRegisterCollaborator, times, onCreateTeam }: FormularioProps) {
+
+    const [nameValue, setNameValue] = useState<string>('');
+    const [roleValue, setRoleValue] = useState<string>('');
+    const [imageValue, setImageValue] = useState<string>('');
+    const [teamValue, setTeamValue] = useState<string>('');
+    const [teamNameValue, setTeamNameValue] = useState<string>('');
+    const [teamColor, setTeamColor] = useState<string>('#000000');
+    const [dateValue, setDateValue] = useState<string>('');
+
+    function handleOnSubmitForm(event: FormEvent) {
         event.preventDefault();
-        const collaborator = {
+        const collaborator: IColaborador  = {
             nome: nameValue,
             cargo:  roleValue,
             imagemUrl: imageValue,
             time: teamValue,
-            favorito: false
+            favorito: false,
+            id: "",
+            data: dateValue
         }
 
         onRegisterCollaborator(collaborator);
@@ -31,13 +43,15 @@ export function Formulario({ onRegisterCollaborator, times, onCreateTeam }) {
         setTeamValue('');
         setTeamNameValue('');
         setTeamColor('#000000');
+        setDateValue('');
     }
 
-    function handleOnCreateTeam(event) {
+    function handleOnCreateTeam(event: FormEvent) {
         event.preventDefault();
-        const newTeam = {
+        const newTeam: ITime = {
             nome: teamNameValue,
-            cor: teamColor
+            cor: teamColor,
+            id: ''
         }
 
         onCreateTeam(newTeam);
@@ -48,6 +62,7 @@ export function Formulario({ onRegisterCollaborator, times, onCreateTeam }) {
         setTeamValue('');
         setTeamNameValue('');
         setTeamColor('#000000');
+        setDateValue('');
     }
 
     return (
@@ -80,13 +95,21 @@ export function Formulario({ onRegisterCollaborator, times, onCreateTeam }) {
                     value={imageValue}
                     onChangeValue={(value) => setImageValue(value)}
                 />
+                <Campo 
+                    content="Data de entrada no time"
+                    id="date"
+                    type="date"
+                    required
+                    value={dateValue}
+                    onChangeValue={(value) => setDateValue(value)}
+                />
                 <ListaSuspensa 
                     content="Time"
                     id="team"
                     lista={times}
                     required
                     value={teamValue}
-                    onChangeValue={(value) => setTeamValue(value)}
+                    onChangeValue={(value: string) => setTeamValue(value)}
                 />
                 <Botao type="submit">
                     Criar card

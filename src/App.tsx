@@ -4,6 +4,8 @@ import { Formulario } from './components/Formulario';
 import { Time } from './components/Time';
 import { Rodape } from './components/Rodape';
 import { v4 as uuidv4 } from "uuid";
+import { IColaborador } from './shared/interfaces/IColaborador';
+import { ITime } from './shared/interfaces/ITime';
 
 function App() {
 
@@ -45,13 +47,13 @@ function App() {
     } 
 ]);
 
-  const [collaboratorList, setCollaboratorList] = useState([]);
+  const [collaboratorList, setCollaboratorList] = useState<IColaborador[]>([]);
 
-  function handleOnRegisterCollaborator(newCollaborator) {
+  function handleOnRegisterCollaborator(newCollaborator: IColaborador) {
     setCollaboratorList([...collaboratorList, {...newCollaborator, id: uuidv4()}]);
   }
 
-  function onChangeColor(color, id) {
+  function onChangeColor(color: string, id: string) {
     setTimes(times.map((time) => {
       if(time.id === id) {
         time.cor = color;
@@ -60,11 +62,11 @@ function App() {
     }));
   }
 
-  function createTeam(team) {
+  function createTeam(team: ITime) {
     setTimes([...times, {...team, id: uuidv4()}]);
   }
 
-  function solveFavorite(collaboratorId) {
+  function solveFavorite(collaboratorId: string) {
     setCollaboratorList(collaboratorList.map((collaborator) => {
       if(collaboratorId === collaborator.id) {
         collaborator.favorito = !collaborator.favorito;
@@ -75,7 +77,7 @@ function App() {
 
   return (
     <>
-      <Banner />
+      <Banner src="/imagens/banner.png" alt="O banner principal da página do Organo" />
       <Formulario 
         onRegisterCollaborator={handleOnRegisterCollaborator}
         times={times}

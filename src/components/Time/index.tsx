@@ -1,8 +1,20 @@
+import { IColaborador } from "../../shared/interfaces/IColaborador";
+import { ITime } from "../../shared/interfaces/ITime";
 import { Colaborador } from "../Colaborador";
 import styles from "./Time.module.css";
 import hexToRgba from "hex-to-rgba";
 
-export function Time({ timeDaVez,  collaborators, deleteCollaboratorFromList, handleOnChangeColor, onClickFavorite }) {
+
+
+interface TimeProps {
+    timeDaVez: ITime;
+    collaborators: IColaborador[];
+    deleteCollaboratorFromList: (colaboradorId: string) => void;
+    handleOnChangeColor: (cor: string, TimId: string) => void;
+    onClickFavorite: (colaboradorId: string) => void;
+}
+
+export function Time({ timeDaVez,  collaborators, deleteCollaboratorFromList, handleOnChangeColor, onClickFavorite }: TimeProps) {
     return(
         (collaborators.length > 0) && 
         <section 
